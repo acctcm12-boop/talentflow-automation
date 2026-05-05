@@ -13,6 +13,12 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppLogsRouteImport } from './routes/app.logs'
+import { Route as AppHealthRouteImport } from './routes/app.health'
+import { Route as AppClientsRouteImport } from './routes/app.clients'
+import { Route as AppBillingRouteImport } from './routes/app.billing'
+import { Route as ApiPublicSchedulerRunRouteImport } from './routes/api.public.scheduler.run'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -34,37 +40,116 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLogsRoute = AppLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHealthRoute = AppHealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClientsRoute = AppClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBillingRoute = AppBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AppRoute,
+} as any)
+const ApiPublicSchedulerRunRoute = ApiPublicSchedulerRunRouteImport.update({
+  id: '/api/public/scheduler/run',
+  path: '/api/public/scheduler/run',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/clients': typeof AppClientsRoute
+  '/app/health': typeof AppHealthRoute
+  '/app/logs': typeof AppLogsRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/': typeof AppIndexRoute
+  '/api/public/scheduler/run': typeof ApiPublicSchedulerRunRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/clients': typeof AppClientsRoute
+  '/app/health': typeof AppHealthRoute
+  '/app/logs': typeof AppLogsRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app': typeof AppIndexRoute
+  '/api/public/scheduler/run': typeof ApiPublicSchedulerRunRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/clients': typeof AppClientsRoute
+  '/app/health': typeof AppHealthRoute
+  '/app/logs': typeof AppLogsRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/': typeof AppIndexRoute
+  '/api/public/scheduler/run': typeof ApiPublicSchedulerRunRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/auth' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/billing'
+    | '/app/clients'
+    | '/app/health'
+    | '/app/logs'
+    | '/app/settings'
+    | '/app/'
+    | '/api/public/scheduler/run'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app'
-  id: '__root__' | '/' | '/app' | '/auth' | '/app/'
+  to:
+    | '/'
+    | '/auth'
+    | '/app/billing'
+    | '/app/clients'
+    | '/app/health'
+    | '/app/logs'
+    | '/app/settings'
+    | '/app'
+    | '/api/public/scheduler/run'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/billing'
+    | '/app/clients'
+    | '/app/health'
+    | '/app/logs'
+    | '/app/settings'
+    | '/app/'
+    | '/api/public/scheduler/run'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ApiPublicSchedulerRunRoute: typeof ApiPublicSchedulerRunRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -97,14 +182,66 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/logs': {
+      id: '/app/logs'
+      path: '/logs'
+      fullPath: '/app/logs'
+      preLoaderRoute: typeof AppLogsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/health': {
+      id: '/app/health'
+      path: '/health'
+      fullPath: '/app/health'
+      preLoaderRoute: typeof AppHealthRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/clients': {
+      id: '/app/clients'
+      path: '/clients'
+      fullPath: '/app/clients'
+      preLoaderRoute: typeof AppClientsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/billing': {
+      id: '/app/billing'
+      path: '/billing'
+      fullPath: '/app/billing'
+      preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/api/public/scheduler/run': {
+      id: '/api/public/scheduler/run'
+      path: '/api/public/scheduler/run'
+      fullPath: '/api/public/scheduler/run'
+      preLoaderRoute: typeof ApiPublicSchedulerRunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppBillingRoute: typeof AppBillingRoute
+  AppClientsRoute: typeof AppClientsRoute
+  AppHealthRoute: typeof AppHealthRoute
+  AppLogsRoute: typeof AppLogsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppBillingRoute: AppBillingRoute,
+  AppClientsRoute: AppClientsRoute,
+  AppHealthRoute: AppHealthRoute,
+  AppLogsRoute: AppLogsRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -114,7 +251,17 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
+  ApiPublicSchedulerRunRoute: ApiPublicSchedulerRunRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
