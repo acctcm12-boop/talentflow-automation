@@ -15,6 +15,10 @@ export const Route = createFileRoute("/api/public/scheduler/run")({
         const sb = supabaseAdmin;
         const now = new Date();
         const nowIso = now.toISOString();
+        // 13:00 IST gate — IST = UTC+5:30 → 13:00 IST = 07:30 UTC
+        const utcMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+        const sendWindowOpen = utcMinutes >= 7 * 60 + 30; // skip dispatch before 13:00 IST
+        const istDateKey = new Date(now.getTime() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
 
         const { data: cases, error } = await sb
           .from("billing_cases")
