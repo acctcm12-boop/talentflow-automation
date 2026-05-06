@@ -14,6 +14,110 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_conversations: {
+        Row: {
+          company_id: string
+          created_at: string
+          id: string
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          id?: string
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          id?: string
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ai_messages: {
+        Row: {
+          company_id: string
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          referenced_entities: Json | null
+          role: string
+          user_id: string
+        }
+        Insert: {
+          company_id: string
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          referenced_entities?: Json | null
+          role: string
+          user_id: string
+        }
+        Update: {
+          company_id?: string
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          referenced_entities?: Json | null
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "ai_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ai_query_logs: {
+        Row: {
+          answer: string | null
+          company_id: string
+          created_at: string
+          id: string
+          question: string
+          referenced_entities: Json | null
+          tokens_in: number | null
+          tokens_out: number | null
+          user_id: string
+        }
+        Insert: {
+          answer?: string | null
+          company_id: string
+          created_at?: string
+          id?: string
+          question: string
+          referenced_entities?: Json | null
+          tokens_in?: number | null
+          tokens_out?: number | null
+          user_id: string
+        }
+        Update: {
+          answer?: string | null
+          company_id?: string
+          created_at?: string
+          id?: string
+          question?: string
+          referenced_entities?: Json | null
+          tokens_in?: number | null
+          tokens_out?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           action: string
@@ -44,6 +148,78 @@ export type Database = {
           entity?: string
           entity_id?: string | null
           id?: string
+        }
+        Relationships: []
+      }
+      automation_jobs: {
+        Row: {
+          body: string | null
+          company_id: string
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          id: string
+          idempotency_key: string | null
+          last_error: string | null
+          meta: Json | null
+          recipient_channel: string
+          recipient_contact: string | null
+          recipient_name: string | null
+          recipient_type: string | null
+          retry_count: number
+          scheduled_at: string
+          status: string
+          subject: string | null
+          template_key: string | null
+          updated_at: string
+          user_id: string | null
+          workflow_type: string
+        }
+        Insert: {
+          body?: string | null
+          company_id: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          idempotency_key?: string | null
+          last_error?: string | null
+          meta?: Json | null
+          recipient_channel?: string
+          recipient_contact?: string | null
+          recipient_name?: string | null
+          recipient_type?: string | null
+          retry_count?: number
+          scheduled_at?: string
+          status?: string
+          subject?: string | null
+          template_key?: string | null
+          updated_at?: string
+          user_id?: string | null
+          workflow_type: string
+        }
+        Update: {
+          body?: string | null
+          company_id?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          idempotency_key?: string | null
+          last_error?: string | null
+          meta?: Json | null
+          recipient_channel?: string
+          recipient_contact?: string | null
+          recipient_name?: string | null
+          recipient_type?: string | null
+          retry_count?: number
+          scheduled_at?: string
+          status?: string
+          subject?: string | null
+          template_key?: string | null
+          updated_at?: string
+          user_id?: string | null
+          workflow_type?: string
         }
         Relationships: []
       }
@@ -288,34 +464,52 @@ export type Database = {
       }
       companies: {
         Row: {
+          bank_details: string | null
           brand_name: string | null
           created_at: string
+          default_billing_pct: number | null
+          default_payment_due_days: number | null
           default_send_time_ist: string
+          gst_rate: number | null
           id: string
           logo_url: string | null
           name: string
+          payment_qr_url: string | null
           timezone: string
           updated_at: string
+          upi_id: string | null
         }
         Insert: {
+          bank_details?: string | null
           brand_name?: string | null
           created_at?: string
+          default_billing_pct?: number | null
+          default_payment_due_days?: number | null
           default_send_time_ist?: string
+          gst_rate?: number | null
           id?: string
           logo_url?: string | null
           name: string
+          payment_qr_url?: string | null
           timezone?: string
           updated_at?: string
+          upi_id?: string | null
         }
         Update: {
+          bank_details?: string | null
           brand_name?: string | null
           created_at?: string
+          default_billing_pct?: number | null
+          default_payment_due_days?: number | null
           default_send_time_ist?: string
+          gst_rate?: number | null
           id?: string
           logo_url?: string | null
           name?: string
+          payment_qr_url?: string | null
           timezone?: string
           updated_at?: string
+          upi_id?: string | null
         }
         Relationships: []
       }
@@ -656,6 +850,10 @@ export type Database = {
       }
       provider_settings: {
         Row: {
+          ai_enabled: boolean
+          ai_model: string | null
+          ai_provider: string | null
+          ai_system_prompt: string | null
           company_id: string
           email_sender: string | null
           email_sender_name: string | null
@@ -681,6 +879,10 @@ export type Database = {
           whatsapp_token: string | null
         }
         Insert: {
+          ai_enabled?: boolean
+          ai_model?: string | null
+          ai_provider?: string | null
+          ai_system_prompt?: string | null
           company_id: string
           email_sender?: string | null
           email_sender_name?: string | null
@@ -706,6 +908,10 @@ export type Database = {
           whatsapp_token?: string | null
         }
         Update: {
+          ai_enabled?: boolean
+          ai_model?: string | null
+          ai_provider?: string | null
+          ai_system_prompt?: string | null
           company_id?: string
           email_sender?: string | null
           email_sender_name?: string | null
@@ -816,6 +1022,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      cancel_pending_jobs: { Args: { _case_id: string }; Returns: number }
       create_workspace: {
         Args: { brand_name?: string; company_name: string }
         Returns: string
@@ -829,6 +1036,8 @@ export type Database = {
         Returns: boolean
       }
       is_super_admin: { Args: { _user_id: string }; Returns: boolean }
+      load_demo_data: { Args: never; Returns: Json }
+      seed_default_templates: { Args: never; Returns: number }
     }
     Enums: {
       app_role:
