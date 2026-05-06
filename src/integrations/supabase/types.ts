@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_logs: {
+        Row: {
+          action: string
+          actor_id: string | null
+          company_id: string
+          created_at: string
+          details: Json | null
+          entity: string
+          entity_id: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          company_id: string
+          created_at?: string
+          details?: Json | null
+          entity: string
+          entity_id?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          company_id?: string
+          created_at?: string
+          details?: Json | null
+          entity?: string
+          entity_id?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
       billing_cases: {
         Row: {
           automation_status: Database["public"]["Enums"]["automation_status"]
@@ -109,6 +142,60 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      candidates: {
+        Row: {
+          company_id: string
+          created_at: string
+          current_ctc: number | null
+          email: string | null
+          expected_ctc: number | null
+          full_name: string
+          id: string
+          location: string | null
+          notes: string | null
+          notice_period: string | null
+          phone: string | null
+          resume_url: string | null
+          status: string
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          current_ctc?: number | null
+          email?: string | null
+          expected_ctc?: number | null
+          full_name: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          notice_period?: string | null
+          phone?: string | null
+          resume_url?: string | null
+          status?: string
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          current_ctc?: number | null
+          email?: string | null
+          expected_ctc?: number | null
+          full_name?: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          notice_period?: string | null
+          phone?: string | null
+          resume_url?: string | null
+          status?: string
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
       }
       clients: {
         Row: {
@@ -298,6 +385,144 @@ export type Database = {
           },
         ]
       }
+      internal_persons: {
+        Row: {
+          active: boolean
+          company_id: string
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          phone: string | null
+          responsibilities: string[]
+          role: string | null
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          active?: boolean
+          company_id: string
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          phone?: string | null
+          responsibilities?: string[]
+          role?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          active?: boolean
+          company_id?: string
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          phone?: string | null
+          responsibilities?: string[]
+          role?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      interviews: {
+        Row: {
+          candidate_id: string | null
+          client_id: string | null
+          company_id: string
+          created_at: string
+          feedback: string | null
+          id: string
+          job_id: string | null
+          location: string | null
+          meeting_link: string | null
+          mode: string
+          recruiter: string | null
+          scheduled_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          candidate_id?: string | null
+          client_id?: string | null
+          company_id: string
+          created_at?: string
+          feedback?: string | null
+          id?: string
+          job_id?: string | null
+          location?: string | null
+          meeting_link?: string | null
+          mode?: string
+          recruiter?: string | null
+          scheduled_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          candidate_id?: string | null
+          client_id?: string | null
+          company_id?: string
+          created_at?: string
+          feedback?: string | null
+          id?: string
+          job_id?: string | null
+          location?: string | null
+          meeting_link?: string | null
+          mode?: string
+          recruiter?: string | null
+          scheduled_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      jobs: {
+        Row: {
+          client_id: string | null
+          company_id: string
+          created_at: string
+          id: string
+          job_title: string
+          location: string | null
+          positions: number
+          salary_max: number | null
+          salary_min: number | null
+          skills: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_id?: string | null
+          company_id: string
+          created_at?: string
+          id?: string
+          job_title: string
+          location?: string | null
+          positions?: number
+          salary_max?: number | null
+          salary_min?: number | null
+          skills?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string | null
+          company_id?: string
+          created_at?: string
+          id?: string
+          job_title?: string
+          location?: string | null
+          positions?: number
+          salary_max?: number | null
+          salary_min?: number | null
+          skills?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           amount: number
@@ -343,6 +568,60 @@ export type Database = {
           },
         ]
       }
+      placements: {
+        Row: {
+          billing_pct: number | null
+          candidate_confirmed: boolean
+          candidate_id: string | null
+          client_confirmed: boolean
+          client_id: string | null
+          company_id: string
+          created_at: string
+          ctc: number | null
+          id: string
+          job_id: string | null
+          joining_date: string | null
+          loi_status: string
+          selection_date: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          billing_pct?: number | null
+          candidate_confirmed?: boolean
+          candidate_id?: string | null
+          client_confirmed?: boolean
+          client_id?: string | null
+          company_id: string
+          created_at?: string
+          ctc?: number | null
+          id?: string
+          job_id?: string | null
+          joining_date?: string | null
+          loi_status?: string
+          selection_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          billing_pct?: number | null
+          candidate_confirmed?: boolean
+          candidate_id?: string | null
+          client_confirmed?: boolean
+          client_id?: string | null
+          company_id?: string
+          created_at?: string
+          ctc?: number | null
+          id?: string
+          job_id?: string | null
+          joining_date?: string | null
+          loi_status?: string
+          selection_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company_id: string | null
@@ -374,6 +653,84 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      provider_settings: {
+        Row: {
+          company_id: string
+          email_sender: string | null
+          email_sender_name: string | null
+          email_smtp_host: string | null
+          email_smtp_pass: string | null
+          email_smtp_port: number | null
+          email_smtp_user: string | null
+          sms_api_key: string | null
+          sms_provider: string | null
+          sms_sender_id: string | null
+          test_email: string | null
+          test_sms: string | null
+          test_whatsapp: string | null
+          updated_at: string
+          whatsapp_api_version: string | null
+          whatsapp_base_url: string | null
+          whatsapp_business_id: string | null
+          whatsapp_phone_number_id: string | null
+          whatsapp_provider: string | null
+          whatsapp_sender_number: string | null
+          whatsapp_template_lang: string | null
+          whatsapp_template_name: string | null
+          whatsapp_token: string | null
+        }
+        Insert: {
+          company_id: string
+          email_sender?: string | null
+          email_sender_name?: string | null
+          email_smtp_host?: string | null
+          email_smtp_pass?: string | null
+          email_smtp_port?: number | null
+          email_smtp_user?: string | null
+          sms_api_key?: string | null
+          sms_provider?: string | null
+          sms_sender_id?: string | null
+          test_email?: string | null
+          test_sms?: string | null
+          test_whatsapp?: string | null
+          updated_at?: string
+          whatsapp_api_version?: string | null
+          whatsapp_base_url?: string | null
+          whatsapp_business_id?: string | null
+          whatsapp_phone_number_id?: string | null
+          whatsapp_provider?: string | null
+          whatsapp_sender_number?: string | null
+          whatsapp_template_lang?: string | null
+          whatsapp_template_name?: string | null
+          whatsapp_token?: string | null
+        }
+        Update: {
+          company_id?: string
+          email_sender?: string | null
+          email_sender_name?: string | null
+          email_smtp_host?: string | null
+          email_smtp_pass?: string | null
+          email_smtp_port?: number | null
+          email_smtp_user?: string | null
+          sms_api_key?: string | null
+          sms_provider?: string | null
+          sms_sender_id?: string | null
+          test_email?: string | null
+          test_sms?: string | null
+          test_whatsapp?: string | null
+          updated_at?: string
+          whatsapp_api_version?: string | null
+          whatsapp_base_url?: string | null
+          whatsapp_business_id?: string | null
+          whatsapp_phone_number_id?: string | null
+          whatsapp_provider?: string | null
+          whatsapp_sender_number?: string | null
+          whatsapp_template_lang?: string | null
+          whatsapp_template_name?: string | null
+          whatsapp_token?: string | null
+        }
+        Relationships: []
       }
       templates: {
         Row: {
@@ -459,6 +816,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_workspace: {
+        Args: { brand_name?: string; company_name: string }
+        Returns: string
+      }
       current_company_id: { Args: never; Returns: string }
       has_role: {
         Args: {
