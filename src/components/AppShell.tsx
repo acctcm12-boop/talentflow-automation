@@ -3,13 +3,17 @@ import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard, Users, Briefcase, CalendarCheck2, Award, Receipt, BellRing,
-  BarChart3, FileText, Settings, LogOut, Activity, UserCircle2, ScrollText, Mail,
+  BarChart3, FileText, Settings, LogOut, Activity, UserCircle2, ScrollText, Mail, Bot, Workflow,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const groups: { label: string; items: { to: string; label: string; icon: any }[] }[] = [
+  { label: "Cockpit", items: [
+    { to: "/app", label: "Automation Cockpit", icon: LayoutDashboard },
+    { to: "/app/copilot", label: "AI Copilot", icon: Bot },
+    { to: "/app/automation", label: "Automation Queue", icon: Workflow },
+  ]},
   { label: "Pipeline", items: [
-    { to: "/app", label: "Overview", icon: LayoutDashboard },
     { to: "/app/candidates", label: "Candidates", icon: UserCircle2 },
     { to: "/app/clients", label: "Clients", icon: Users },
     { to: "/app/jobs", label: "Jobs", icon: Briefcase },

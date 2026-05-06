@@ -22,10 +22,12 @@ import { Route as AppJobsRouteImport } from './routes/app.jobs'
 import { Route as AppInterviewsRouteImport } from './routes/app.interviews'
 import { Route as AppInternalAlertsRouteImport } from './routes/app.internal-alerts'
 import { Route as AppHealthRouteImport } from './routes/app.health'
+import { Route as AppCopilotRouteImport } from './routes/app.copilot'
 import { Route as AppCollectionsRouteImport } from './routes/app.collections'
 import { Route as AppClientsRouteImport } from './routes/app.clients'
 import { Route as AppCandidatesRouteImport } from './routes/app.candidates'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
+import { Route as AppAutomationRouteImport } from './routes/app.automation'
 import { Route as ApiPublicSchedulerRunRouteImport } from './routes/api.public.scheduler.run'
 
 const AuthRoute = AuthRouteImport.update({
@@ -93,6 +95,11 @@ const AppHealthRoute = AppHealthRouteImport.update({
   path: '/health',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCopilotRoute = AppCopilotRouteImport.update({
+  id: '/copilot',
+  path: '/copilot',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCollectionsRoute = AppCollectionsRouteImport.update({
   id: '/collections',
   path: '/collections',
@@ -113,6 +120,11 @@ const AppBillingRoute = AppBillingRouteImport.update({
   path: '/billing',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAutomationRoute = AppAutomationRouteImport.update({
+  id: '/automation',
+  path: '/automation',
+  getParentRoute: () => AppRoute,
+} as any)
 const ApiPublicSchedulerRunRoute = ApiPublicSchedulerRunRouteImport.update({
   id: '/api/public/scheduler/run',
   path: '/api/public/scheduler/run',
@@ -123,10 +135,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/automation': typeof AppAutomationRoute
   '/app/billing': typeof AppBillingRoute
   '/app/candidates': typeof AppCandidatesRoute
   '/app/clients': typeof AppClientsRoute
   '/app/collections': typeof AppCollectionsRoute
+  '/app/copilot': typeof AppCopilotRoute
   '/app/health': typeof AppHealthRoute
   '/app/internal-alerts': typeof AppInternalAlertsRoute
   '/app/interviews': typeof AppInterviewsRoute
@@ -142,10 +156,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/automation': typeof AppAutomationRoute
   '/app/billing': typeof AppBillingRoute
   '/app/candidates': typeof AppCandidatesRoute
   '/app/clients': typeof AppClientsRoute
   '/app/collections': typeof AppCollectionsRoute
+  '/app/copilot': typeof AppCopilotRoute
   '/app/health': typeof AppHealthRoute
   '/app/internal-alerts': typeof AppInternalAlertsRoute
   '/app/interviews': typeof AppInterviewsRoute
@@ -163,10 +179,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/automation': typeof AppAutomationRoute
   '/app/billing': typeof AppBillingRoute
   '/app/candidates': typeof AppCandidatesRoute
   '/app/clients': typeof AppClientsRoute
   '/app/collections': typeof AppCollectionsRoute
+  '/app/copilot': typeof AppCopilotRoute
   '/app/health': typeof AppHealthRoute
   '/app/internal-alerts': typeof AppInternalAlertsRoute
   '/app/interviews': typeof AppInterviewsRoute
@@ -185,10 +203,12 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/app/automation'
     | '/app/billing'
     | '/app/candidates'
     | '/app/clients'
     | '/app/collections'
+    | '/app/copilot'
     | '/app/health'
     | '/app/internal-alerts'
     | '/app/interviews'
@@ -204,10 +224,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/app/automation'
     | '/app/billing'
     | '/app/candidates'
     | '/app/clients'
     | '/app/collections'
+    | '/app/copilot'
     | '/app/health'
     | '/app/internal-alerts'
     | '/app/interviews'
@@ -224,10 +246,12 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/app/automation'
     | '/app/billing'
     | '/app/candidates'
     | '/app/clients'
     | '/app/collections'
+    | '/app/copilot'
     | '/app/health'
     | '/app/internal-alerts'
     | '/app/interviews'
@@ -341,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHealthRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/copilot': {
+      id: '/app/copilot'
+      path: '/copilot'
+      fullPath: '/app/copilot'
+      preLoaderRoute: typeof AppCopilotRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/collections': {
       id: '/app/collections'
       path: '/collections'
@@ -369,6 +400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBillingRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/automation': {
+      id: '/app/automation'
+      path: '/automation'
+      fullPath: '/app/automation'
+      preLoaderRoute: typeof AppAutomationRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/api/public/scheduler/run': {
       id: '/api/public/scheduler/run'
       path: '/api/public/scheduler/run'
@@ -380,10 +418,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAutomationRoute: typeof AppAutomationRoute
   AppBillingRoute: typeof AppBillingRoute
   AppCandidatesRoute: typeof AppCandidatesRoute
   AppClientsRoute: typeof AppClientsRoute
   AppCollectionsRoute: typeof AppCollectionsRoute
+  AppCopilotRoute: typeof AppCopilotRoute
   AppHealthRoute: typeof AppHealthRoute
   AppInternalAlertsRoute: typeof AppInternalAlertsRoute
   AppInterviewsRoute: typeof AppInterviewsRoute
@@ -397,10 +437,12 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAutomationRoute: AppAutomationRoute,
   AppBillingRoute: AppBillingRoute,
   AppCandidatesRoute: AppCandidatesRoute,
   AppClientsRoute: AppClientsRoute,
   AppCollectionsRoute: AppCollectionsRoute,
+  AppCopilotRoute: AppCopilotRoute,
   AppHealthRoute: AppHealthRoute,
   AppInternalAlertsRoute: AppInternalAlertsRoute,
   AppInterviewsRoute: AppInterviewsRoute,
