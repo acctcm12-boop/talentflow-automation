@@ -25,7 +25,7 @@ function AppLayout() {
     const [brand, setBrand] = useState("");
     const createCompany = async (e: React.FormEvent) => {
       e.preventDefault(); setBusy(true);
-      const { error } = await supabase.rpc("create_workspace", { company_name: name, brand_name: brand || null });
+      const { error } = await supabase.rpc("create_workspace", { company_name: name, brand_name: brand || undefined });
       setBusy(false);
       if (error) { toast.error(error.message); return; }
       await refresh();
