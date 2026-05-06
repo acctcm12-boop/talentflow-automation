@@ -15,6 +15,10 @@ export const Route = createFileRoute("/api/public/scheduler/run")({
         const sb = supabaseAdmin;
         const now = new Date();
         const nowIso = now.toISOString();
+        // 13:00 IST gate — IST = UTC+5:30 → 13:00 IST = 07:30 UTC
+        const utcMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+        const sendWindowOpen = utcMinutes >= 7 * 60 + 30; // skip dispatch before 13:00 IST
+        const istDateKey = new Date(now.getTime() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
 
         const { data: cases, error } = await sb
           .from("billing_cases")
@@ -70,9 +74,17 @@ export const Route = createFileRoute("/api/public/scheduler/run")({
           }
 
           const recipient = c.clients?.email ?? c.clients?.whatsapp ?? "unknown";
-          const idemKey = `${c.id}:${target.stage}:${target.day_offset}:email:${recipient}`;
+          // Idempotency includes IST date to guarantee one-send-per-day per channel/recipient
+          const idemKey = `${c.id}:${target.stage}:${target.day_offset}:email:${recipient}:${istDateKey}`;
 
-          // Idempotency check
+          if (!sendWindowOpen) {
+            // Re-poll after the 13:00 IST window opens
+            const next = new Date(now); next.setUTCHours(7, 30, 0, 0);
+            if (next.getTime() < now.getTime()) next.setUTCDate(next.getUTCDate() + 1);
+            await sb.from("billing_cases").update({ next_run_at: next.toISOString() }).eq("id", c.id);
+            skipped++; continue;
+          }
+
           const { data: existing } = await sb.from("dispatch_logs").select("id").eq("idempotency_key", idemKey).maybeSingle();
           if (existing) { skipped++; continue; }
 

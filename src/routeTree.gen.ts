@@ -13,10 +13,18 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppTemplatesRouteImport } from './routes/app.templates'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppReportsRouteImport } from './routes/app.reports'
+import { Route as AppPlacementsRouteImport } from './routes/app.placements'
 import { Route as AppLogsRouteImport } from './routes/app.logs'
+import { Route as AppJobsRouteImport } from './routes/app.jobs'
+import { Route as AppInterviewsRouteImport } from './routes/app.interviews'
+import { Route as AppInternalAlertsRouteImport } from './routes/app.internal-alerts'
 import { Route as AppHealthRouteImport } from './routes/app.health'
+import { Route as AppCollectionsRouteImport } from './routes/app.collections'
 import { Route as AppClientsRouteImport } from './routes/app.clients'
+import { Route as AppCandidatesRouteImport } from './routes/app.candidates'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as ApiPublicSchedulerRunRouteImport } from './routes/api.public.scheduler.run'
 
@@ -40,9 +48,24 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppTemplatesRoute = AppTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsRoute = AppReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlacementsRoute = AppPlacementsRouteImport.update({
+  id: '/placements',
+  path: '/placements',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLogsRoute = AppLogsRouteImport.update({
@@ -50,14 +73,39 @@ const AppLogsRoute = AppLogsRouteImport.update({
   path: '/logs',
   getParentRoute: () => AppRoute,
 } as any)
+const AppJobsRoute = AppJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInterviewsRoute = AppInterviewsRouteImport.update({
+  id: '/interviews',
+  path: '/interviews',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInternalAlertsRoute = AppInternalAlertsRouteImport.update({
+  id: '/internal-alerts',
+  path: '/internal-alerts',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppHealthRoute = AppHealthRouteImport.update({
   id: '/health',
   path: '/health',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCollectionsRoute = AppCollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppClientsRoute = AppClientsRouteImport.update({
   id: '/clients',
   path: '/clients',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCandidatesRoute = AppCandidatesRouteImport.update({
+  id: '/candidates',
+  path: '/candidates',
   getParentRoute: () => AppRoute,
 } as any)
 const AppBillingRoute = AppBillingRouteImport.update({
@@ -76,10 +124,18 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/candidates': typeof AppCandidatesRoute
   '/app/clients': typeof AppClientsRoute
+  '/app/collections': typeof AppCollectionsRoute
   '/app/health': typeof AppHealthRoute
+  '/app/internal-alerts': typeof AppInternalAlertsRoute
+  '/app/interviews': typeof AppInterviewsRoute
+  '/app/jobs': typeof AppJobsRoute
   '/app/logs': typeof AppLogsRoute
+  '/app/placements': typeof AppPlacementsRoute
+  '/app/reports': typeof AppReportsRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/templates': typeof AppTemplatesRoute
   '/app/': typeof AppIndexRoute
   '/api/public/scheduler/run': typeof ApiPublicSchedulerRunRoute
 }
@@ -87,10 +143,18 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/candidates': typeof AppCandidatesRoute
   '/app/clients': typeof AppClientsRoute
+  '/app/collections': typeof AppCollectionsRoute
   '/app/health': typeof AppHealthRoute
+  '/app/internal-alerts': typeof AppInternalAlertsRoute
+  '/app/interviews': typeof AppInterviewsRoute
+  '/app/jobs': typeof AppJobsRoute
   '/app/logs': typeof AppLogsRoute
+  '/app/placements': typeof AppPlacementsRoute
+  '/app/reports': typeof AppReportsRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/templates': typeof AppTemplatesRoute
   '/app': typeof AppIndexRoute
   '/api/public/scheduler/run': typeof ApiPublicSchedulerRunRoute
 }
@@ -100,10 +164,18 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/candidates': typeof AppCandidatesRoute
   '/app/clients': typeof AppClientsRoute
+  '/app/collections': typeof AppCollectionsRoute
   '/app/health': typeof AppHealthRoute
+  '/app/internal-alerts': typeof AppInternalAlertsRoute
+  '/app/interviews': typeof AppInterviewsRoute
+  '/app/jobs': typeof AppJobsRoute
   '/app/logs': typeof AppLogsRoute
+  '/app/placements': typeof AppPlacementsRoute
+  '/app/reports': typeof AppReportsRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/templates': typeof AppTemplatesRoute
   '/app/': typeof AppIndexRoute
   '/api/public/scheduler/run': typeof ApiPublicSchedulerRunRoute
 }
@@ -114,10 +186,18 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/app/billing'
+    | '/app/candidates'
     | '/app/clients'
+    | '/app/collections'
     | '/app/health'
+    | '/app/internal-alerts'
+    | '/app/interviews'
+    | '/app/jobs'
     | '/app/logs'
+    | '/app/placements'
+    | '/app/reports'
     | '/app/settings'
+    | '/app/templates'
     | '/app/'
     | '/api/public/scheduler/run'
   fileRoutesByTo: FileRoutesByTo
@@ -125,10 +205,18 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/app/billing'
+    | '/app/candidates'
     | '/app/clients'
+    | '/app/collections'
     | '/app/health'
+    | '/app/internal-alerts'
+    | '/app/interviews'
+    | '/app/jobs'
     | '/app/logs'
+    | '/app/placements'
+    | '/app/reports'
     | '/app/settings'
+    | '/app/templates'
     | '/app'
     | '/api/public/scheduler/run'
   id:
@@ -137,10 +225,18 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/app/billing'
+    | '/app/candidates'
     | '/app/clients'
+    | '/app/collections'
     | '/app/health'
+    | '/app/internal-alerts'
+    | '/app/interviews'
+    | '/app/jobs'
     | '/app/logs'
+    | '/app/placements'
+    | '/app/reports'
     | '/app/settings'
+    | '/app/templates'
     | '/app/'
     | '/api/public/scheduler/run'
   fileRoutesById: FileRoutesById
@@ -182,11 +278,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/templates': {
+      id: '/app/templates'
+      path: '/templates'
+      fullPath: '/app/templates'
+      preLoaderRoute: typeof AppTemplatesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/settings': {
       id: '/app/settings'
       path: '/settings'
       fullPath: '/app/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/reports': {
+      id: '/app/reports'
+      path: '/reports'
+      fullPath: '/app/reports'
+      preLoaderRoute: typeof AppReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/placements': {
+      id: '/app/placements'
+      path: '/placements'
+      fullPath: '/app/placements'
+      preLoaderRoute: typeof AppPlacementsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/logs': {
@@ -196,6 +313,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLogsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/jobs': {
+      id: '/app/jobs'
+      path: '/jobs'
+      fullPath: '/app/jobs'
+      preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/interviews': {
+      id: '/app/interviews'
+      path: '/interviews'
+      fullPath: '/app/interviews'
+      preLoaderRoute: typeof AppInterviewsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/internal-alerts': {
+      id: '/app/internal-alerts'
+      path: '/internal-alerts'
+      fullPath: '/app/internal-alerts'
+      preLoaderRoute: typeof AppInternalAlertsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/health': {
       id: '/app/health'
       path: '/health'
@@ -203,11 +341,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHealthRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/collections': {
+      id: '/app/collections'
+      path: '/collections'
+      fullPath: '/app/collections'
+      preLoaderRoute: typeof AppCollectionsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/clients': {
       id: '/app/clients'
       path: '/clients'
       fullPath: '/app/clients'
       preLoaderRoute: typeof AppClientsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/candidates': {
+      id: '/app/candidates'
+      path: '/candidates'
+      fullPath: '/app/candidates'
+      preLoaderRoute: typeof AppCandidatesRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/billing': {
@@ -229,19 +381,35 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppBillingRoute: typeof AppBillingRoute
+  AppCandidatesRoute: typeof AppCandidatesRoute
   AppClientsRoute: typeof AppClientsRoute
+  AppCollectionsRoute: typeof AppCollectionsRoute
   AppHealthRoute: typeof AppHealthRoute
+  AppInternalAlertsRoute: typeof AppInternalAlertsRoute
+  AppInterviewsRoute: typeof AppInterviewsRoute
+  AppJobsRoute: typeof AppJobsRoute
   AppLogsRoute: typeof AppLogsRoute
+  AppPlacementsRoute: typeof AppPlacementsRoute
+  AppReportsRoute: typeof AppReportsRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppTemplatesRoute: typeof AppTemplatesRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppBillingRoute: AppBillingRoute,
+  AppCandidatesRoute: AppCandidatesRoute,
   AppClientsRoute: AppClientsRoute,
+  AppCollectionsRoute: AppCollectionsRoute,
   AppHealthRoute: AppHealthRoute,
+  AppInternalAlertsRoute: AppInternalAlertsRoute,
+  AppInterviewsRoute: AppInterviewsRoute,
+  AppJobsRoute: AppJobsRoute,
   AppLogsRoute: AppLogsRoute,
+  AppPlacementsRoute: AppPlacementsRoute,
+  AppReportsRoute: AppReportsRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppTemplatesRoute: AppTemplatesRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
