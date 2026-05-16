@@ -66,6 +66,7 @@ function Landing() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
+        <h2 className="text-2xl font-semibold tracking-tight mb-6">Everything you need to automate revenue</h2>
         <div className="grid gap-5 md:grid-cols-3">
           {[
             { icon: CalendarCheck2, title: "Interview Automation", body: "Confirmations and reminders 24h, 3h, 1h, 30m before — and feedback chase after." },
