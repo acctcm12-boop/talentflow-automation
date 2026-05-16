@@ -6,8 +6,25 @@ export const Route = createFileRoute("/")({
   component: Landing,
   head: () => ({
     meta: [
-      { title: "TalentFlow Revenue Engine — Recruitment to Payment, Automated" },
+      { title: "TalentFlow — Recruitment Revenue Automation" },
       { name: "description", content: "Automate interviews, LOI, joining, Performa Invoice, Tax Invoice, payment follow-up and legal escalation from one intelligent dashboard." },
+      { property: "og:title", content: "TalentFlow — Recruitment Revenue Automation" },
+      { property: "og:description", content: "Automate interviews, joining, billing and collections end-to-end." },
+      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "TalentFlow",
+          description: "End-to-end recruitment, billing and collection automation.",
+          publisher: { "@type": "Organization", name: "TalentFlow" },
+        }),
+      },
     ],
   }),
 });
