@@ -1,0 +1,10 @@
+# TalentFlow Revenue Engine
+
+> AI-powered recruitment automation: interviews, LOI, joining, billing, collections, and legal escalation in one dashboard.
+
+TalentFlow automates the full recruitment-to-payment lifecycle for staffing companies — candidate sourcing, interview reminders, joining confirmation, Performa/Tax invoicing, 15-stage collection follow-up at 13:00 IST, and legal escalation. Includes a server-side scheduler with idempotent dispatch and a payment-stop rule that cancels reminders the moment a case is marked paid.
+
+## Pages
+
+- [Home](/): Product overview and feature highlights.
+- [Sign in](/auth): Sign in or create a workspace.

@@ -6,8 +6,25 @@ export const Route = createFileRoute("/")({
   component: Landing,
   head: () => ({
     meta: [
-      { title: "TalentFlow Revenue Engine — Recruitment to Payment, Automated" },
+      { title: "TalentFlow — Recruitment Revenue Automation" },
       { name: "description", content: "Automate interviews, LOI, joining, Performa Invoice, Tax Invoice, payment follow-up and legal escalation from one intelligent dashboard." },
+      { property: "og:title", content: "TalentFlow — Recruitment Revenue Automation" },
+      { property: "og:description", content: "Automate interviews, joining, billing and collections end-to-end." },
+      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "TalentFlow",
+          description: "End-to-end recruitment, billing and collection automation.",
+          publisher: { "@type": "Organization", name: "TalentFlow" },
+        }),
+      },
     ],
   }),
 });
@@ -49,6 +66,7 @@ function Landing() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
+        <h2 className="text-2xl font-semibold tracking-tight mb-6">Everything you need to automate revenue</h2>
         <div className="grid gap-5 md:grid-cols-3">
           {[
             { icon: CalendarCheck2, title: "Interview Automation", body: "Confirmations and reminders 24h, 3h, 1h, 30m before — and feedback chase after." },
@@ -65,7 +83,7 @@ function Landing() {
               <div className="h-9 w-9 rounded-lg bg-primary/10 text-primary grid place-items-center mb-3">
                 <f.icon className="h-4 w-4" />
               </div>
-              <div className="font-semibold">{f.title}</div>
+              <h3 className="font-semibold">{f.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{f.body}</p>
             </div>
           ))}
